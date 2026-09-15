@@ -1,1144 +1,719 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Thisan Selection | Ahangama</title>
+<title>Thisan Selection | Shoes & Fashion | Ahangama</title>
 
 <meta name="description"
-content="Thisan Selection - Quality footwear and fashion in Ahangama, Matara Road. Explore our latest collection.">
-
+content="Thisan Selection - Shoes, sandals and fashion in Ahangama. Visit us on Matara Road, Ahangama.">
 <meta name="keywords"
-content="Thisan Selection, Thisan Shoe Ahangama, shoe shop Ahangama, footwear Ahangama, shoes Ahangama">
+content="Thisan Selection, shoes Ahangama, sandals Ahangama, footwear Sri Lanka">
 
-<meta name="theme-color" content="#111111">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+rel="stylesheet">
 
 <style>
 
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
-
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
 
 html{
-    scroll-behavior:smooth;
+  scroll-behavior:smooth;
 }
 
 body{
-    font-family:'DM Sans',Arial,sans-serif;
-    color:#222;
-    background:#f5f2eb;
+  font-family:"DM Sans",sans-serif;
+  background:#f7f5f1;
+  color:#222;
 }
 
-/* ================= NAVBAR ================= */
+/* NAVBAR */
 
 .navbar{
-    position:absolute;
-    top:0;
-    left:0;
-    width:100%;
-    z-index:10;
-
-    padding:25px 6%;
-
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-
-    color:white;
-
-    background:linear-gradient(
-        rgba(0,0,0,.65),
-        transparent
-    );
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  z-index:10;
+  padding:22px 6%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  color:white;
 }
 
 .logo{
-    font-family:'Playfair Display',serif;
-    font-size:29px;
-    letter-spacing:1px;
+  font-family:"Playfair Display",serif;
+  font-size:25px;
+  font-weight:700;
+  letter-spacing:1px;
 }
 
-.nav-links{
-    display:flex;
-    gap:30px;
+.navbar a{
+  color:white;
+  text-decoration:none;
+  margin-left:25px;
+  font-size:14px;
 }
 
-.nav-links a{
-    color:white;
-    text-decoration:none;
-
-    font-size:12px;
-    text-transform:uppercase;
-    letter-spacing:2px;
-}
-
-.nav-links a:hover{
-    opacity:.65;
-}
-
-
-/* ================= HERO ================= */
+/* HERO */
 
 .hero{
+  min-height:90vh;
 
-    min-height:95vh;
+  background:
+  linear-gradient(rgba(0,0,0,.38),rgba(0,0,0,.55)),
+  url("https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=1800&q=85")
+  center/cover no-repeat;
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    text-align:center;
-
-    color:white;
-
-    padding:100px 20px 60px;
-
-    background:
-    linear-gradient(
-        rgba(0,0,0,.38),
-        rgba(0,0,0,.58)
-    ),
-    url("https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=2200&q=90")
-    center/cover no-repeat;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:white;
+  padding:100px 20px;
 }
 
 .hero-content{
-    max-width:900px;
-}
-
-.hero-small{
-    font-size:12px;
-    letter-spacing:5px;
-    text-transform:uppercase;
-    margin-bottom:22px;
+  max-width:850px;
 }
 
 .hero h1{
-    font-family:'Playfair Display',serif;
-
-    font-size:clamp(50px,8vw,95px);
-
-    font-weight:500;
-
-    line-height:1;
-
-    margin-bottom:25px;
+  font-family:"Playfair Display",serif;
+  font-size:clamp(48px,8vw,90px);
+  line-height:1;
+  margin-bottom:20px;
 }
 
 .hero p{
-    max-width:650px;
-
-    margin:auto;
-
-    line-height:1.9;
-
-    font-size:15px;
-
-    color:#eee;
-}
-
-.hero-buttons{
-    margin-top:35px;
-
-    display:flex;
-
-    justify-content:center;
-
-    gap:12px;
-
-    flex-wrap:wrap;
+  font-size:18px;
+  margin-bottom:30px;
 }
 
 .hero-btn{
-    display:inline-block;
-
-    padding:15px 28px;
-
-    color:white;
-
-    border:1px solid rgba(255,255,255,.7);
-
-    text-decoration:none;
-
-    font-size:11px;
-
-    letter-spacing:2px;
-
-    text-transform:uppercase;
-
-    transition:.3s;
+  display:inline-block;
+  padding:14px 28px;
+  background:white;
+  color:#111;
+  text-decoration:none;
+  border-radius:3px;
+  font-weight:600;
 }
 
-.hero-btn:hover{
-    background:white;
-    color:#111;
-}
-
-
-/* ================= INTRO ================= */
+/* INTRO */
 
 .intro{
-
-    padding:100px 8%;
-
-    text-align:center;
-
-    background:#f5f2eb;
+  text-align:center;
+  padding:75px 20px 45px;
+  max-width:850px;
+  margin:auto;
 }
 
-.label{
-    font-size:10px;
-
-    letter-spacing:4px;
-
-    text-transform:uppercase;
-
-    color:#777;
-
-    margin-bottom:15px;
+.small-title{
+  text-transform:uppercase;
+  letter-spacing:3px;
+  font-size:12px;
+  color:#777;
+  margin-bottom:12px;
 }
 
-.intro h2,
-.products-heading h2,
-.contact h2{
-
-    font-family:'Playfair Display',serif;
-
-    font-size:43px;
-
-    font-weight:500;
-
-    margin-bottom:20px;
+.intro h2{
+  font-family:"Playfair Display",serif;
+  font-size:42px;
+  margin-bottom:15px;
 }
 
 .intro p{
-
-    max-width:720px;
-
-    margin:auto;
-
-    color:#666;
-
-    line-height:2;
-
-    font-size:15px;
+  color:#666;
+  line-height:1.8;
 }
 
+/* SHOE PHOTO BANNER */
 
-/* ================= IMAGE BANNER ================= */
+.photo-banner{
+  width:100%;
+  height:420px;
 
-.image-banner{
+  background:
+  linear-gradient(rgba(0,0,0,.15),rgba(0,0,0,.25)),
+  url("https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&w=1800&q=85")
+  center/cover no-repeat;
 
-    height:520px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    text-align:center;
-
-    color:white;
-
-    background:
-    linear-gradient(
-        rgba(0,0,0,.25),
-        rgba(0,0,0,.45)
-    ),
-    url("https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=2200&q=90")
-    center/cover no-repeat;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  color:white;
 }
 
-.image-banner h2{
-
-    font-family:'Playfair Display',serif;
-
-    font-size:52px;
-
-    font-weight:500;
+.photo-banner h2{
+  font-family:"Playfair Display",serif;
+  font-size:55px;
 }
 
-.image-banner p{
-
-    margin-top:15px;
-
-    letter-spacing:3px;
-
-    font-size:11px;
-}
-
-
-/* ================= PRODUCTS ================= */
+/* PRODUCTS */
 
 .products-section{
-
-    background:white;
-
-    padding:95px 5%;
+  padding:75px 6%;
+  background:#fff;
 }
 
-.products-heading{
-
-    text-align:center;
-
-    margin-bottom:45px;
+.section-heading{
+  text-align:center;
+  margin-bottom:45px;
 }
 
-.products-heading p{
+.section-heading h2{
+  font-family:"Playfair Display",serif;
+  font-size:42px;
+}
 
-    color:#777;
-
-    font-size:14px;
+.section-heading p{
+  color:#777;
+  margin-top:10px;
 }
 
 .products{
+  max-width:1200px;
+  margin:auto;
 
-    max-width:1250px;
+  display:grid;
+  grid-template-columns:
+  repeat(auto-fit,minmax(220px,1fr));
 
-    margin:auto;
-
-    display:grid;
-
-    grid-template-columns:
-    repeat(4,1fr);
-
-    gap:22px;
+  gap:25px;
 }
 
-
-/* PRODUCT CARD */
-
 .card{
-
-    background:white;
-
-    overflow:hidden;
-
-    box-shadow:
-    0 5px 25px rgba(0,0,0,.08);
-
-    transition:.35s;
+  background:#f8f7f4;
+  overflow:hidden;
+  transition:.3s;
 }
 
 .card:hover{
-
-    transform:translateY(-7px);
-
-    box-shadow:
-    0 15px 40px rgba(0,0,0,.15);
+  transform:translateY(-5px);
+  box-shadow:0 12px 30px rgba(0,0,0,.10);
 }
 
-.card-image{
-
-    height:310px;
-
-    overflow:hidden;
-
-    background:#eee;
-}
-
-.card-image img{
-
-    width:100%;
-
-    height:100%;
-
-    object-fit:cover;
-
-    transition:.5s;
-}
-
-.card:hover .card-image img{
-
-    transform:scale(1.07);
+.card img{
+  width:100%;
+  height:300px;
+  object-fit:cover;
+  display:block;
 }
 
 .info{
-
-    padding:20px;
-
-    text-align:center;
+  padding:18px;
 }
 
 .info h3{
-
-    font-size:15px;
-
-    font-weight:600;
-
-    margin-bottom:8px;
+  font-size:17px;
+  margin-bottom:8px;
 }
 
 .price{
-
-    font-size:17px;
-
-    font-weight:700;
+  font-size:18px;
+  font-weight:700;
 }
 
-
-/* ================= STORE ================= */
+/* STORE SECTION */
 
 .store{
-
-    display:grid;
-
-    grid-template-columns:
-    1fr 1fr;
-
-    min-height:580px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  min-height:500px;
 }
 
-.store-photo{
-
-    background:
-
-    linear-gradient(
-        rgba(0,0,0,.15),
-        rgba(0,0,0,.15)
-    ),
-
-    url("https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1800&q=90")
-    center/cover no-repeat;
+.store-image{
+  background:
+  url("https://images.unsplash.com/photo-1515347619252-60a4bf4fff4f?auto=format&fit=crop&w=1200&q=85")
+  center/cover no-repeat;
 }
 
-.store-info{
-
-    background:#171717;
-
-    color:white;
-
-    padding:80px 11%;
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:center;
+.store-text{
+  background:#171717;
+  color:white;
+  padding:70px 10%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
 }
 
-.store-info .label{
-
-    color:#999;
+.store-text .small-title{
+  color:#aaa;
 }
 
-.store-info h2{
-
-    font-family:'Playfair Display',serif;
-
-    font-size:48px;
-
-    font-weight:500;
-
-    margin-bottom:25px;
+.store-text h2{
+  font-family:"Playfair Display",serif;
+  font-size:45px;
+  margin-bottom:20px;
 }
 
-.store-info p{
-
-    color:#ccc;
-
-    line-height:2;
-
-    font-size:14px;
+.store-text p{
+  color:#ccc;
+  line-height:1.8;
 }
 
-.store-buttons{
-
-    margin-top:28px;
-
-    display:flex;
-
-    gap:10px;
-
-    flex-wrap:wrap;
-}
-
-.store-btn{
-
-    color:white;
-
-    border:1px solid #777;
-
-    text-decoration:none;
-
-    padding:14px 20px;
-
-    font-size:11px;
-
-    letter-spacing:1.5px;
-
-    text-transform:uppercase;
-}
-
-.store-btn:hover{
-
-    background:white;
-
-    color:#111;
-}
-
-
-/* ================= CONTACT ================= */
+/* CONTACT */
 
 .contact{
+  text-align:center;
+  padding:80px 20px;
+}
 
-    padding:100px 7%;
-
-    text-align:center;
-
-    background:#f5f2eb;
+.contact h2{
+  font-family:"Playfair Display",serif;
+  font-size:42px;
+  margin-bottom:15px;
 }
 
 .contact p{
-
-    color:#666;
-
-    margin-bottom:30px;
+  color:#666;
+  margin:8px;
 }
 
-.contact-buttons{
-
-    display:flex;
-
-    justify-content:center;
-
-    gap:10px;
-
-    flex-wrap:wrap;
+.buttons{
+  margin-top:25px;
 }
 
-.contact-btn{
+.buttons a{
+  display:inline-block;
+  padding:13px 20px;
+  margin:6px;
+  text-decoration:none;
+  border-radius:3px;
+  font-weight:600;
+}
 
-    padding:15px 23px;
-
-    background:#111;
-
-    color:white;
-
-    text-decoration:none;
-
-    font-size:11px;
-
-    letter-spacing:1px;
-
-    text-transform:uppercase;
+.call{
+  background:#111;
+  color:white;
 }
 
 .whatsapp{
-
-    background:#1fa855;
+  background:#25D366;
+  color:white;
 }
 
+.location{
+  background:#ddd;
+  color:#111;
+}
 
-/* ================= FOOTER ================= */
+/* FOOTER */
 
 footer{
-
-    background:#111;
-
-    color:white;
-
-    text-align:center;
-
-    padding:50px 20px;
+  background:#111;
+  color:#aaa;
+  text-align:center;
+  padding:30px 20px;
 }
 
-.footer-logo{
-
-    font-family:'Playfair Display',serif;
-
-    font-size:28px;
-
-    margin-bottom:10px;
+footer strong{
+  color:white;
 }
 
-footer p{
+/* MOBILE */
 
-    color:#aaa;
+@media(max-width:700px){
 
+  .navbar{
+    padding:18px 20px;
+  }
+
+  .navbar a{
+    margin-left:10px;
     font-size:12px;
+  }
 
-    line-height:1.8;
-}
+  .hero{
+    min-height:80vh;
+  }
 
-.copyright{
+  .hero h1{
+    font-size:55px;
+  }
 
-    margin-top:25px;
+  .intro h2,
+  .section-heading h2,
+  .contact h2{
+    font-size:34px;
+  }
 
-    padding-top:20px;
+  .photo-banner{
+    height:300px;
+  }
 
-    border-top:1px solid #333;
+  .photo-banner h2{
+    font-size:40px;
+  }
 
-    color:#777;
-}
+  .store{
+    grid-template-columns:1fr;
+  }
 
+  .store-image{
+    height:350px;
+  }
 
-/* ================= MOBILE ================= */
+  .store-text{
+    padding:55px 25px;
+  }
 
-@media(max-width:900px){
+  .store-text h2{
+    font-size:38px;
+  }
 
-    .nav-links{
-        display:none;
-    }
+  .card img{
+    height:250px;
+  }
 
-    .navbar{
-        justify-content:center;
-    }
-
-    .hero{
-        min-height:90vh;
-    }
-
-    .hero h1{
-        font-size:58px;
-    }
-
-    .products{
-        grid-template-columns:repeat(2,1fr);
-        gap:14px;
-    }
-
-    .card-image{
-        height:230px;
-    }
-
-    .store{
-        grid-template-columns:1fr;
-    }
-
-    .store-photo{
-        min-height:420px;
-    }
-
-    .store-info{
-        padding:70px 9%;
-    }
-}
-
-
-@media(max-width:500px){
-
-    .hero h1{
-        font-size:46px;
-    }
-
-    .hero-small{
-        font-size:9px;
-        letter-spacing:3px;
-    }
-
-    .hero p{
-        font-size:13px;
-    }
-
-    .intro h2,
-    .products-heading h2,
-    .contact h2{
-        font-size:34px;
-    }
-
-    .products{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .card-image{
-        height:195px;
-    }
-
-    .info{
-        padding:14px 6px;
-    }
-
-    .info h3{
-        font-size:12px;
-    }
-
-    .price{
-        font-size:14px;
-    }
-
-    .image-banner{
-        height:420px;
-    }
-
-    .image-banner h2{
-        font-size:38px;
-    }
-
-    .store-info h2{
-        font-size:38px;
-    }
 }
 
 </style>
-
 </head>
-
 
 <body>
 
+<!-- NAVBAR -->
 
-<!-- NAVIGATION -->
+<nav class="navbar">
 
-<header class="navbar">
+  <div class="logo">
+    Thisan Selection
+  </div>
 
-    <div class="logo">
-        Thisan Selection
-    </div>
+  <div>
+    <a href="#products">Products</a>
+    <a href="#contact">Contact</a>
+  </div>
 
-    <nav class="nav-links">
-
-        <a href="#home">
-            Home
-        </a>
-
-        <a href="#products">
-            Products
-        </a>
-
-        <a href="#store">
-            Store
-        </a>
-
-        <a href="#contact">
-            Contact
-        </a>
-
-    </nav>
-
-</header>
-
+</nav>
 
 
 <!-- HERO -->
 
-<section class="hero" id="home">
+<section class="hero">
 
-    <div class="hero-content">
+  <div class="hero-content">
 
-        <div class="hero-small">
-            Ahangama • Sri Lanka
-        </div>
+    <h1>Thisan Selection</h1>
 
-        <h1>
-            Thisan Selection
-        </h1>
+    <p>
+      Shoes • Sandals • Fashion
+      <br>
+      Matara Road, Ahangama
+    </p>
 
-        <p>
-            Discover footwear and fashion selected for
-            your everyday style, right in the heart of Ahangama.
-        </p>
+    <a class="hero-btn" href="#products">
+      Explore Collection
+    </a>
 
-        <div class="hero-buttons">
-
-            <a
-                class="hero-btn"
-                href="#products">
-                Explore Collection
-            </a>
-
-            <a
-                class="hero-btn"
-                href="https://maps.app.goo.gl/pR6wXTMdVNSAYVxs6"
-                target="_blank">
-                Visit Us
-            </a>
-
-        </div>
-
-    </div>
+  </div>
 
 </section>
-
 
 
 <!-- INTRO -->
 
 <section class="intro">
 
-    <div class="label">
-        Welcome
-    </div>
+  <div class="small-title">
+    Welcome
+  </div>
 
-    <h2>
-        Find Your Style
-    </h2>
+  <h2>Step Into Your Style</h2>
 
-    <p>
-        Welcome to Thisan Selection.
-        Explore our latest footwear and fashion
-        collection and discover something made
-        for your style.
-    </p>
+  <p>
+    Discover stylish footwear and quality fashion
+    at Thisan Selection, Ahangama.
+  </p>
 
 </section>
 
 
+<!-- SHOE PHOTO -->
 
-<!-- LARGE IMAGE -->
+<section class="photo-banner">
 
-<section class="image-banner">
-
-    <div>
-
-        <h2>
-            Style That Moves With You
-        </h2>
-
-        <p>
-            QUALITY • STYLE • COMFORT
-        </p>
-
-    </div>
+  <h2>Walk With Style</h2>
 
 </section>
-
 
 
 <!-- PRODUCTS -->
 
-<section
-    class="products-section"
-    id="products">
+<section class="products-section" id="products">
 
-    <div class="products-heading">
+  <div class="section-heading">
 
-        <div class="label">
-            Our Collection
-        </div>
-
-        <h2>
-            Latest Products
-        </h2>
-
-        <p>
-            Discover what's available at Thisan Selection.
-        </p>
-
+    <div class="small-title">
+      Our Collection
     </div>
 
+    <h2>Latest Products</h2>
 
-    <div
-        id="productsBox"
-        class="products">
+    <p>
+      Explore our latest shoes and footwear.
+    </p>
 
-        <p
-            style="
-            grid-column:1/-1;
-            text-align:center;
-            color:#777;">
-            Loading products...
-        </p>
+  </div>
 
-    </div>
+  <div id="products" class="products">
+
+    <p style="text-align:center">
+      Loading products...
+    </p>
+
+  </div>
 
 </section>
-
 
 
 <!-- STORE -->
 
-<section
-    class="store"
-    id="store">
+<section class="store">
 
-    <div class="store-photo"></div>
+  <div class="store-image"></div>
 
+  <div class="store-text">
 
-    <div class="store-info">
-
-        <div class="label">
-            Visit Our Store
-        </div>
-
-        <h2>
-            Thisan Selection
-        </h2>
-
-        <p>
-            📍 Matara Road, Ahangama
-        </p>
-
-        <p>
-            🕘 Open daily:
-            9:30 AM - 8:00 PM
-        </p>
-
-        <p>
-            Come and explore our collection in person.
-        </p>
-
-
-        <div class="store-buttons">
-
-            <a
-                class="store-btn"
-                href="https://maps.app.goo.gl/pR6wXTMdVNSAYVxs6"
-                target="_blank">
-                Get Directions
-            </a>
-
-            <a
-                class="store-btn"
-                href="tel:0774250707">
-                Call Us
-            </a>
-
-        </div>
-
+    <div class="small-title">
+      Visit Us
     </div>
 
-</section>
+    <h2>
+      Thisan Selection
+    </h2>
 
+    <p>
+      Find us on Matara Road, Ahangama.
+      Come and discover our latest footwear
+      and fashion collection.
+    </p>
+
+  </div>
+
+</section>
 
 
 <!-- CONTACT -->
 
-<section
-    class="contact"
-    id="contact">
+<section class="contact" id="contact">
 
-    <div class="label">
-        Contact Us
-    </div>
+  <div class="small-title">
+    Get In Touch
+  </div>
 
-    <h2>
-        We Are Here For You
-    </h2>
+  <h2>Visit Our Store</h2>
 
-    <p>
-        Call or WhatsApp us for more information.
-    </p>
+  <p>
+    📍 Matara Road, Ahangama
+  </p>
 
+  <p>
+    🕘 Open: 9:30 AM - 8:00 PM
+  </p>
 
-    <div class="contact-buttons">
+  <div class="buttons">
 
-        <a
-            class="contact-btn"
-            href="tel:0774250707">
-            📞 077 425 0707
-        </a>
+    <a class="call"
+       href="tel:0774250707">
+       📞 077 425 0707
+    </a>
 
-        <a
-            class="contact-btn"
-            href="tel:0774250700">
-            📞 077 425 0700
-        </a>
+    <a class="call"
+       href="tel:0774250700">
+       📞 077 425 0700
+    </a>
 
-        <a
-            class="contact-btn whatsapp"
-            href="https://wa.me/94774250707"
-            target="_blank">
-            WhatsApp
-        </a>
+    <br>
 
-        <a
-            class="contact-btn"
-            href="https://maps.app.goo.gl/pR6wXTMdVNSAYVxs6"
-            target="_blank">
-            📍 Location
-        </a>
+    <a class="whatsapp"
+       href="https://wa.me/94774250707"
+       target="_blank">
+       WhatsApp 1
+    </a>
 
-    </div>
+    <a class="whatsapp"
+       href="https://wa.me/94774250700"
+       target="_blank">
+       WhatsApp 2
+    </a>
+
+    <br>
+
+    <a class="location"
+       href="https://maps.app.goo.gl/pR6wXTMdVNSAYVxs6"
+       target="_blank">
+       📍 Open Location
+    </a>
+
+  </div>
 
 </section>
-
 
 
 <!-- FOOTER -->
 
 <footer>
 
-    <div class="footer-logo">
-        Thisan Selection
-    </div>
-
-    <p>
-        Matara Road, Ahangama, Sri Lanka
-    </p>
-
-    <p>
-        9:30 AM - 8:00 PM
-    </p>
-
-    <div class="copyright">
-        © 2026 Thisan Selection - Ahangama
-    </div>
+  <p>
+    © 2026 <strong>Thisan Selection</strong> -
+    Ahangama
+  </p>
 
 </footer>
-
 
 
 <!-- FIREBASE -->
 
 <script type="module">
 
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+import {
+  initializeApp
+} from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
 
 import {
-    getFirestore,
-    collection,
-    getDocs,
-    query,
-    orderBy
-}
-from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+  getFirestore,
+  collection,
+  getDocs,
+  query,
+  orderBy
+} from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
 
 const firebaseConfig = {
 
-    apiKey:
-    "AIzaSyB8phN-4a8nDIhmpf5MlwsV5-_2yPwXEEk",
+  apiKey:
+  "AIzaSyB8BphN-4a8nDIhmpf5MlwsV5-_2yPwXEEk",
 
-    authDomain:
-    "thisan-shoe-ahangama.firebaseapp.com",
+  authDomain:
+  "thisan-shoe-ahangama.firebaseapp.com",
 
-    projectId:
-    "thisan-shoe-ahangama",
+  projectId:
+  "thisan-shoe-ahangama",
 
-    storageBucket:
-    "thisan-shoe-ahangama.firebasestorage.app",
+  storageBucket:
+  "thisan-shoe-ahangama.firebasestorage.app",
 
-    messagingSenderId:
-    "552970131351",
+  messagingSenderId:
+  "552970131351",
 
-    appId:
-    "1:552970131:web:9917c56ca7435ec62cd6d2",
+  appId:
+  "1:552970131:web:9917c56ca7435ec62cd6d2",
 
-    measurementId:
-    "G-LP21L8JN5P"
+  measurementId:
+  "G-LP21L8JN5P"
 
 };
 
 
-const app =
-initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 
-const db =
-getFirestore(app);
+const db = getFirestore(app);
 
-const box =
-document.getElementById("productsBox");
+const box = document.querySelector("#products");
 
 
 async function loadProducts(){
 
-    try{
+  try{
 
-        const q =
-        query(
-            collection(db,"products"),
-            orderBy(
-                "createdAt",
-                "desc"
-            )
-        );
+    const q = query(
+      collection(db,"products"),
+      orderBy("createdAt","desc")
+    );
 
+    const snap = await getDocs(q);
 
-        const snap =
-        await getDocs(q);
+    box.innerHTML = "";
 
+    if(snap.empty){
 
-        box.innerHTML = "";
+      box.innerHTML = `
+        <p style="text-align:center">
+          No products available yet.
+        </p>
+      `;
 
-
-        if(snap.empty){
-
-            box.innerHTML = `
-
-                <p
-                style="
-                grid-column:1/-1;
-                text-align:center;
-                color:#777;">
-
-                    Products coming soon...
-
-                </p>
-
-            `;
-
-            return;
-        }
-
-
-        snap.forEach(docSnap => {
-
-            const p =
-            docSnap.data();
-
-
-            const card =
-            document.createElement("article");
-
-
-            card.className =
-            "card";
-
-
-            card.innerHTML = `
-
-                <div class="card-image">
-
-                    <img
-                        src="${p.image || ''}"
-                        alt="${p.name || 'Thisan Selection product'}"
-                        loading="lazy"
-                    >
-
-                </div>
-
-
-                <div class="info">
-
-                    <h3>
-                        ${p.name || ''}
-                    </h3>
-
-                    <div class="price">
-                        ${p.price
-                        ? "Rs. " + p.price
-                        : ""}
-                    </div>
-
-                </div>
-
-            `;
-
-
-            box.appendChild(card);
-
-        });
-
-
-    }catch(error){
-
-        console.error(error);
-
-
-        box.innerHTML = `
-
-            <p
-            style="
-            grid-column:1/-1;
-            text-align:center;
-            color:#777;">
-
-                Products could not be loaded.
-
-            </p>
-
-        `;
-
+      return;
     }
+
+
+    snap.forEach(docSnap => {
+
+      const p = docSnap.data();
+
+      const card =
+      document.createElement("div");
+
+      card.className = "card";
+
+
+      const img =
+      document.createElement("img");
+
+      img.src = p.image || "";
+
+      img.alt = p.name || "Product";
+
+
+      const info =
+      document.createElement("div");
+
+      info.className = "info";
+
+
+      const name =
+      document.createElement("h3");
+
+      name.textContent =
+      p.name || "";
+
+
+      const price =
+      document.createElement("div");
+
+      price.className = "price";
+
+      price.textContent =
+      p.price ? "Rs. " + p.price : "";
+
+
+      info.appendChild(name);
+
+      info.appendChild(price);
+
+      card.appendChild(img);
+
+      card.appendChild(info);
+
+      box.appendChild(card);
+
+    });
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+    box.innerHTML = `
+      <p style="text-align:center">
+        Products could not be loaded.
+      </p>
+    `;
+
+  }
 
 }
 
@@ -1146,7 +721,6 @@ async function loadProducts(){
 loadProducts();
 
 </script>
-
 
 </body>
 </html>
