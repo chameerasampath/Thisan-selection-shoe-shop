@@ -380,12 +380,13 @@ document
 
   catch(error){
 
-    console.error(error);
+  console.error(error);
 
-    loginMessage.textContent =
-    "Login failed.";
+  loginMessage.textContent =
+  error.code + " - " + error.message;
 
-  }
+}
+
 
 });
 
