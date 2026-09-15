@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Thisan Selection - Admin</title>
 
 <style>
-
 *{
   box-sizing:border-box;
   margin:0;
@@ -21,187 +19,167 @@ body{
   color:#222;
 }
 
-header{
-  background:#111;
-  color:white;
-  padding:22px;
-  text-align:center;
-}
-
 .container{
-  max-width:700px;
-  margin:30px auto;
-  padding:20px;
+  max-width:1000px;
+  margin:auto;
+  padding:25px 15px;
 }
 
-.box{
+h1{
+  text-align:center;
+  margin-bottom:25px;
+}
+
+.card{
   background:white;
   padding:25px;
-  border-radius:14px;
-  box-shadow:0 3px 15px #0002;
+  border-radius:15px;
   margin-bottom:20px;
-}
-
-h2{
-  margin-bottom:20px;
+  box-shadow:0 5px 20px rgba(0,0,0,.08);
 }
 
 input{
   width:100%;
   padding:13px;
-  margin-bottom:12px;
+  margin:8px 0;
   border:1px solid #ccc;
   border-radius:8px;
   font-size:16px;
 }
 
-input[type="file"]{
-  background:#fafafa;
+button{
+  border:0;
+  padding:12px 18px;
+  border-radius:8px;
+  cursor:pointer;
+  font-size:15px;
+  margin-top:8px;
 }
 
-button{
-  width:100%;
-  padding:13px;
-  border:0;
-  border-radius:8px;
+.login-btn,
+.add-btn{
   background:#111;
   color:white;
-  font-size:16px;
-  font-weight:bold;
-  cursor:pointer;
-  margin-top:5px;
+  width:100%;
 }
 
-button:hover{
-  opacity:.85;
-}
-
-.logout{
+.logout-btn{
   background:#b00020;
+  color:white;
 }
 
 .product{
-  border:1px solid #ddd;
-  border-radius:10px;
-  padding:15px;
-  margin-bottom:15px;
+  display:flex;
+  align-items:center;
+  gap:15px;
+  border-bottom:1px solid #ddd;
+  padding:15px 0;
 }
 
 .product img{
-  width:100%;
-  max-height:250px;
+  width:90px;
+  height:90px;
   object-fit:cover;
-  border-radius:8px;
-  margin-bottom:12px;
+  border-radius:10px;
 }
 
-.product h3{
+.product-info{
+  flex:1;
+}
+
+.product-info h3{
   margin-bottom:6px;
 }
 
-.product-price{
-  font-weight:bold;
-  margin-bottom:12px;
+.edit-btn{
+  background:#222;
+  color:white;
+  margin-right:5px;
 }
 
-.actions{
-  display:flex;
-  gap:8px;
+.delete-btn{
+  background:#d32f2f;
+  color:white;
 }
 
-.actions button{
-  margin:0;
+#loginMessage,
+#message{
+  margin-top:12px;
+  text-align:center;
 }
 
-.edit{
-  background:#555;
-}
-
-.delete{
-  background:#c62828;
-}
-
-#adminPanel{
+.hidden{
   display:none;
 }
 
-#loginBox{
-  max-width:450px;
-  margin:50px auto;
-}
+@media(max-width:600px){
+  .product{
+    align-items:flex-start;
+  }
 
-.message{
-  text-align:center;
-  margin-top:12px;
-  font-weight:bold;
-}
+  .product img{
+    width:75px;
+    height:75px;
+  }
 
-.note{
-  color:#777;
-  font-size:14px;
-  margin-bottom:12px;
+  .product button{
+    font-size:13px;
+    padding:8px 10px;
+  }
 }
-
 </style>
-
 </head>
 
 <body>
 
+<div class="container">
 
-<header>
+  <!-- LOGIN -->
+  <div id="loginSection" class="card">
 
-  <h1>Thisan Selection</h1>
+    <h1>Admin Login</h1>
 
-  <p>Admin Panel</p>
+    <input
+      type="email"
+      id="email"
+      placeholder="Email"
+      autocomplete="email"
+    >
 
-</header>
+    <input
+      type="password"
+      id="password"
+      placeholder="Password"
+      autocomplete="current-password"
+    >
 
+    <button class="login-btn" id="loginBtn">
+      Login
+    </button>
 
-<!-- LOGIN -->
+    <p id="loginMessage"></p>
 
-<div id="loginBox" class="box">
-
-  <h2>Admin Login</h2>
-
-  <input
-    type="email"
-    id="email"
-    placeholder="Email"
-  >
-
-  <input
-    type="password"
-    id="password"
-    placeholder="Password"
-  >
-
-  <button id="loginBtn">
-    Login
-  </button>
-
-  <div id="loginMessage" class="message"></div>
-
-</div>
+  </div>
 
 
-<!-- ADMIN PANEL -->
+  <!-- ADMIN PANEL -->
+  <div id="adminSection" class="hidden">
 
-<div id="adminPanel">
+    <div class="card">
 
-  <div class="container">
+      <h1>Thisan Selection Admin</h1>
+
+      <button class="logout-btn" id="logoutBtn">
+        Logout
+      </button>
+
+    </div>
 
 
     <!-- ADD PRODUCT -->
-
-    <div class="box">
+    <div class="card">
 
       <h2>Add Product</h2>
-
-      <p class="note">
-        Product name and photo are required.
-        Price is optional.
-      </p>
 
       <input
         type="text"
@@ -213,7 +191,6 @@ button:hover{
         type="number"
         id="productPrice"
         placeholder="Price (optional)"
-        min="0"
       >
 
       <input
@@ -222,31 +199,25 @@ button:hover{
         accept="image/*"
       >
 
-      <button id="addBtn">
+      <button class="add-btn" id="addBtn">
         Add Product
       </button>
 
-      <div id="addMessage" class="message"></div>
+      <p id="message"></p>
 
     </div>
 
 
     <!-- PRODUCTS -->
-
-    <div class="box">
+    <div class="card">
 
       <h2>Products</h2>
 
-      <div id="productList">
+      <div id="productsList">
         Loading...
       </div>
 
     </div>
-
-
-    <button class="logout" id="logoutBtn">
-      Logout
-    </button>
 
   </div>
 
@@ -255,88 +226,123 @@ button:hover{
 
 <script type="module">
 
-
-import {
-  initializeApp
-} from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
-
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
   getAuth,
   signInWithEmailAndPassword,
   onAuthStateChanged,
   signOut
-} from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
-
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 import {
   getFirestore,
   collection,
   addDoc,
   getDocs,
-  doc,
   updateDoc,
   deleteDoc,
-  serverTimestamp,
+  doc,
   query,
-  orderBy
-} from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+  orderBy,
+  serverTimestamp
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
+
+/* =========================
+   FIREBASE CONFIG
+========================= */
 
 const firebaseConfig = {
-  apiKey: "AIzaSyB8phN-4a8nDIhmpf5MlwsV5-_2yPwXEEk",
-  authDomain: "thisan-shoe-ahangama.firebaseapp.com",
-  projectId: "thisan-shoe-ahangama",
-  storageBucket: "thisan-shoe-ahangama.firebasestorage.app",
-  messagingSenderId: "552970131351",
-  appId: "1:552970131351:web:9917c56ca7435ec62cd6d2",
-  measurementId: "G-LP21L8JN5P"
+
+  apiKey:
+  "AIzaSyB8phN-4a8nDIhmpf5MlwsV5-_2yPwXEEk",
+
+  authDomain:
+  "thisan-shoe-ahangama.firebaseapp.com",
+
+  projectId:
+  "thisan-shoe-ahangama",
+
+  storageBucket:
+  "thisan-shoe-ahangama.firebasestorage.app",
+
+  messagingSenderId:
+  "552970131351",
+
+  appId:
+  "1:552970131351:web:9917c56ca7435ec62cd6d2",
+
+  measurementId:
+  "G-LP21L8JN5P"
 };
 
-};
+
+/* =========================
+   FIREBASE START
+========================= */
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const db = getFirestore(app);
 
 
-const app =
-initializeApp(firebaseConfig);
-
-
-const auth =
-getAuth(app);
-
-
-const db =
-getFirestore(app);
-
-
-/* ADMIN UID */
+/* =========================
+   ADMIN UID
+========================= */
 
 const ADMIN_UID =
 "s9cPLQO3vPTIVExTyBeHRyGdn0V2";
 
 
-/* ELEMENTS */
+/* =========================
+   ELEMENTS
+========================= */
 
-const loginBox =
-document.getElementById("loginBox");
+const loginSection =
+document.getElementById("loginSection");
 
-const adminPanel =
-document.getElementById("adminPanel");
+const adminSection =
+document.getElementById("adminSection");
+
+const loginBtn =
+document.getElementById("loginBtn");
+
+const logoutBtn =
+document.getElementById("logoutBtn");
 
 const loginMessage =
 document.getElementById("loginMessage");
 
-const addMessage =
-document.getElementById("addMessage");
+const message =
+document.getElementById("message");
 
-const productList =
-document.getElementById("productList");
+const productsList =
+document.getElementById("productsList");
+
+const productName =
+document.getElementById("productName");
+
+const productPrice =
+document.getElementById("productPrice");
+
+const productImage =
+document.getElementById("productImage");
+
+const addBtn =
+document.getElementById("addBtn");
 
 
-/* LOGIN */
+/* =========================
+   LOGIN
+========================= */
 
-document
-.getElementById("loginBtn")
-.addEventListener("click", async()=>{
+loginBtn.addEventListener("click", async () => {
 
   const email =
   document.getElementById("email").value.trim();
@@ -344,69 +350,89 @@ document
   const password =
   document.getElementById("password").value;
 
-
   if(!email || !password){
 
     loginMessage.textContent =
-    "Enter email and password.";
+    "Please enter email and password.";
 
     return;
-
   }
 
+  loginMessage.textContent =
+  "Logging in...";
 
   try{
 
+    const result =
     await signInWithEmailAndPassword(
       auth,
       email,
       password
     );
 
+    if(result.user.uid !== ADMIN_UID){
+
+      await signOut(auth);
+
+      loginMessage.textContent =
+      "You are not authorized as admin.";
+
+      return;
+    }
+
+    loginMessage.textContent =
+    "";
+
+  }catch(error){
+
+    console.error(error);
+
+    loginMessage.textContent =
+    error.code + " - " + error.message;
   }
-
-  catch(error){
-
-  console.error(error);
-
-  loginMessage.textContent =
-  error.code + " - " + error.message;
-
-}
-
 
 });
 
 
-/* AUTH CHECK */
+/* =========================
+   AUTH CHECK
+========================= */
 
-onAuthStateChanged(auth, user=>{
+onAuthStateChanged(auth, async (user) => {
 
-  if(
-    user &&
-    user.uid === ADMIN_UID
-  ){
+  if(user && user.uid === ADMIN_UID){
 
-    loginBox.style.display="none";
+    loginSection.classList.add("hidden");
 
-    adminPanel.style.display="block";
+    adminSection.classList.remove("hidden");
 
     loadProducts();
 
-  }
+  }else{
 
-  else{
+    loginSection.classList.remove("hidden");
 
-    loginBox.style.display="block";
-
-    adminPanel.style.display="none";
+    adminSection.classList.add("hidden");
 
   }
 
 });
 
 
-/* IMAGE COMPRESS */
+/* =========================
+   LOGOUT
+========================= */
+
+logoutBtn.addEventListener("click", async () => {
+
+  await signOut(auth);
+
+});
+
+
+/* =========================
+   IMAGE COMPRESS
+========================= */
 
 function compressImage(file){
 
@@ -415,449 +441,42 @@ function compressImage(file){
     const reader =
     new FileReader();
 
-    reader.onload = event=>{
+    reader.onload = (event) => {
 
       const img =
       new Image();
 
-      img.onload = ()=>{
+      img.onload = () => {
 
         const canvas =
         document.createElement("canvas");
 
         const maxWidth = 900;
 
-        let width =
-        img.width;
-
-        let height =
-        img.height;
-
-
-        if(width > maxWidth){
-
-          height =
-          height * maxWidth / width;
-
-          width =
-          maxWidth;
-
-        }
-
+        const scale =
+        Math.min(
+          1,
+          maxWidth / img.width
+        );
 
         canvas.width =
-        width;
+        img.width * scale;
 
         canvas.height =
-        height;
-
+        img.height * scale;
 
         const ctx =
         canvas.getContext("2d");
-
 
         ctx.drawImage(
           img,
           0,
           0,
-          width,
-          height
+          canvas.width,
+          canvas.height
         );
 
-
-        resolve(
-          canvas.toDataURL(
-            "image/jpeg",
-            0.75
-          )
-        );
-
-      };
-
-
-      img.onerror =
-      reject;
-
-      img.src =
-      event.target.result;
-
-    };
-
-
-    reader.onerror =
-    reject;
-
-    reader.readAsDataURL(file);
-
-  });
-
-}
-
-
-/* ADD PRODUCT */
-
-document
-.getElementById("addBtn")
-.addEventListener("click", async()=>{
-
-  const name =
-  document
-  .getElementById("productName")
-  .value
-  .trim();
-
-
-  const price =
-  document
-  .getElementById("productPrice")
-  .value
-  .trim();
-
-
-  const imageFile =
-  document
-  .getElementById("productImage")
-  .files[0];
-
-
-  if(!name){
-
-    addMessage.textContent =
-    "Product name is required.";
-
-    return;
-
-  }
-
-
-  if(!imageFile){
-
-    addMessage.textContent =
-    "Please select a product photo.";
-
-    return;
-
-  }
-
-
-  try{
-
-    addMessage.textContent =
-    "Uploading...";
-
-
-    const image =
-    await compressImage(imageFile);
-
-
-    await addDoc(
-      collection(db,"products"),
-      {
-        name:name,
-
-        price:price || "",
-
-        image:image,
-
-        createdAt:
-        serverTimestamp()
-      }
-    );
-
-
-    document
-    .getElementById("productName")
-    .value="";
-
-
-    document
-    .getElementById("productPrice")
-    .value="";
-
-
-    document
-    .getElementById("productImage")
-    .value="";
-
-
-    addMessage.textContent =
-    "Product added successfully!";
-
-
-    loadProducts();
-
-  }
-
-  catch(error){
-
-    console.error(error);
-
-    addMessage.textContent =
-    "Upload failed.";
-
-  }
-
-});
-
-
-/* LOAD PRODUCTS */
-
-async function loadProducts(){
-
-  try{
-
-    const q =
-    query(
-      collection(db,"products"),
-      orderBy("createdAt","desc")
-    );
-
-
-    const snap =
-    await getDocs(q);
-
-
-    productList.innerHTML="";
-
-
-    if(snap.empty){
-
-      productList.innerHTML =
-      "<p>No products yet.</p>";
-
-      return;
-
-    }
-
-
-    snap.forEach(docSnap=>{
-
-      const p =
-      docSnap.data();
-
-
-      const div =
-      document.createElement("div");
-
-      div.className =
-      "product";
-
-
-      const img =
-      document.createElement("img");
-
-      img.src =
-      p.image || "";
-
-
-      const title =
-      document.createElement("h3");
-
-      title.textContent =
-      p.name || "";
-
-
-      const price =
-      document.createElement("div");
-
-      price.className =
-      "product-price";
-
-
-      if(p.price){
-
-        price.textContent =
-        "Rs. " + p.price;
-
-      }
-      else{
-
-        price.textContent =
-        "Price not added";
-
-      }
-
-
-      const actions =
-      document.createElement("div");
-
-      actions.className =
-      "actions";
-
-
-      const editBtn =
-      document.createElement("button");
-
-      editBtn.className =
-      "edit";
-
-      editBtn.textContent =
-      "Edit";
-
-
-      const deleteBtn =
-      document.createElement("button");
-
-      deleteBtn.className =
-      "delete";
-
-      deleteBtn.textContent =
-      "Delete";
-
-
-      editBtn.onclick =
-      ()=>editProduct(
-        docSnap.id,
-        p
-      );
-
-
-      deleteBtn.onclick =
-      ()=>deleteProduct(
-        docSnap.id
-      );
-
-
-      actions.appendChild(editBtn);
-
-      actions.appendChild(deleteBtn);
-
-
-      div.appendChild(img);
-
-      div.appendChild(title);
-
-      div.appendChild(price);
-
-      div.appendChild(actions);
-
-
-      productList.appendChild(div);
-
-    });
-
-  }
-
-  catch(error){
-
-    console.error(error);
-
-    productList.innerHTML =
-    "<p>Could not load products.</p>";
-
-  }
-
-}
-
-
-/* EDIT */
-
-async function editProduct(id,p){
-
-  const newName =
-  prompt(
-    "Product name:",
-    p.name || ""
-  );
-
-
-  if(newName === null){
-    return;
-  }
-
-
-  const newPrice =
-  prompt(
-    "Price (leave empty if no price):",
-    p.price || ""
-  );
-
-
-  if(newPrice === null){
-    return;
-  }
-
-
-  try{
-
-    await updateDoc(
-      doc(db,"products",id),
-      {
-        name:newName.trim(),
-
-        price:newPrice.trim()
-      }
-    );
-
-
-    loadProducts();
-
-  }
-
-  catch(error){
-
-    console.error(error);
-
-    alert(
-      "Could not update product."
-    );
-
-  }
-
-}
-
-
-/* DELETE */
-
-async function deleteProduct(id){
-
-  const confirmDelete =
-  confirm(
-    "Delete this product?"
-  );
-
-
-  if(!confirmDelete){
-    return;
-  }
-
-
-  try{
-
-    await deleteDoc(
-      doc(db,"products",id)
-    );
-
-
-    loadProducts();
-
-  }
-
-  catch(error){
-
-    console.error(error);
-
-    alert(
-      "Could not delete product."
-    );
-
-  }
-
-}
-
-
-/* LOGOUT */
-
-document
-.getElementById("logoutBtn")
-.addEventListener("click", async()=>{
-
-  await signOut(auth);
-
-});
-
-
-</script>
-
-</body>
-</html>
+        const data =
+        canvas.toDataURL(
+          "image/jpeg",
+          0.75
