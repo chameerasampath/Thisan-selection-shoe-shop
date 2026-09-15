@@ -8,56 +8,71 @@
 
 <style>
 *{box-sizing:border-box}
+
 body{
-font-family:Arial;
-background:#f3f3f3;
-margin:0;
-padding:20px
+ font-family:Arial;
+ background:#f2f2f2;
+ margin:0;
+ padding:20px;
 }
+
 .container{
-max-width:700px;
-margin:auto
+ max-width:700px;
+ margin:auto;
 }
+
 .box{
-background:white;
-padding:20px;
-border-radius:15px;
-margin-bottom:20px;
-box-shadow:0 3px 12px #0001
+ background:white;
+ padding:20px;
+ border-radius:12px;
+ margin-bottom:20px;
+ box-shadow:0 2px 8px #0002;
 }
+
+h1{text-align:center}
+
 input,button{
-width:100%;
-padding:13px;
-margin-top:10px;
-border-radius:8px;
-border:1px solid #ccc;
-font-size:16px
+ width:100%;
+ padding:12px;
+ margin-top:10px;
+ border-radius:8px;
+ border:1px solid #ccc;
 }
+
 button{
-background:#111;
-color:white;
-border:0;
-font-weight:bold
+ background:#111;
+ color:white;
+ cursor:pointer;
+ border:0;
 }
+
+.logout{
+ background:#b00020;
+}
+
 .product{
-display:flex;
-gap:15px;
-align-items:center;
-padding:12px;
-border-bottom:1px solid #ddd
+ background:#fafafa;
+ padding:12px;
+ margin-top:15px;
+ border-radius:10px;
+ border:1px solid #ddd;
 }
+
 .product img{
-width:80px;
-height:80px;
-object-fit:cover;
-border-radius:8px
+ width:100%;
+ max-height:250px;
+ object-fit:contain;
 }
+
 .delete{
-background:#e53935;
-width:auto;
-padding:9px 13px
+ background:#d00000;
 }
-#panel{display:none}
+
+.edit{
+ background:#444;
+}
+
+#adminPanel{display:none}
 </style>
 </head>
 
@@ -65,44 +80,62 @@ padding:9px 13px
 
 <div class="container">
 
-<div id="login" class="box">
+<h1>🛠 Thisan Selection Admin</h1>
+
+<div id="loginBox" class="box">
+
 <h2>Admin Login</h2>
 
 <input
-id="password"
-type="password"
-placeholder="Admin password">
+ id="email"
+ type="email"
+ placeholder="Email"
+>
 
-<button onclick="login()">LOGIN</button>
+<input
+ id="password"
+ type="password"
+ placeholder="Password"
+>
 
-<p id="loginMsg"></p>
+<button id="loginBtn">
+Login
+</button>
+
+<p id="loginMessage"></p>
+
 </div>
 
 
-<div id="panel">
+<div id="adminPanel">
 
 <div class="box">
 
 <h2>Add Product</h2>
 
 <input
-id="name"
-placeholder="Product name">
+ id="productName"
+ type="text"
+ placeholder="Product name"
+>
 
 <input
-id="price"
-placeholder="Price">
+ id="productPrice"
+ type="number"
+ placeholder="Price"
+>
 
 <input
-id="photo"
-type="file"
-accept="image/*">
+ id="productImage"
+ type="file"
+ accept="image/*"
+>
 
-<button onclick="addProduct()">
-ADD PRODUCT
+<button id="addBtn">
+Add Product
 </button>
 
-<p id="msg"></p>
+<p id="message"></p>
 
 </div>
 
@@ -111,11 +144,15 @@ ADD PRODUCT
 
 <h2>Products</h2>
 
-<div id="list">
+<div id="productList">
 Loading...
 </div>
 
 </div>
+
+<button class="logout" id="logoutBtn">
+Logout
+</button>
 
 </div>
 
@@ -125,257 +162,344 @@ Loading...
 <script type="module">
 
 import { initializeApp }
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
 
 import {
-getFirestore,
-collection,
-addDoc,
-getDocs,
-deleteDoc,
-doc
-}
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+ getAuth,
+ signInWithEmailAndPassword,
+ onAuthStateChanged,
+ signOut
+} from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+
+import {
+ getFirestore,
+ collection,
+ addDoc,
+ getDocs,
+ updateDoc,
+ deleteDoc,
+ doc,
+ serverTimestamp,
+ query,
+ orderBy
+} from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
 
 const firebaseConfig = {
 
-apiKey: "AIzaSyB8phN-4a8nDIhmpf5MlwsV5-_2yPwXEEk",
+ apiKey: "AIzaSyB8phN-4a8nDIhmpf5MlwsV5-_2yPwXEEk",
 
-authDomain:
-"thisan-shoe-ahangama.firebaseapp.com",
+ authDomain:
+ "thisan-shoe-ahangama.firebaseapp.com",
 
-projectId:
-"thisan-shoe-ahangama",
+ projectId:
+ "thisan-shoe-ahangama",
 
-storageBucket:
-"thisan-shoe-ahangama.firebasestorage.app",
+ storageBucket:
+ "thisan-shoe-ahangama.firebasestorage.app",
 
-messagingSenderId:
-"552970131351",
+ messagingSenderId:
+ "552970131351",
 
-appId:
-"1:552970131351:web:9917c56ca7435ec62cd6d2",
+ appId:
+ "1:552970131:web:9917c56ca7435ec62cd6d2",
 
-measurementId:
-"G-LP21L8JN5P"
-
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-
-/* CHANGE THIS PASSWORD */
-const ADMIN_PASSWORD = "Thisan1234";
-
-
-window.login = function(){
-
-const password =
-document.getElementById("password").value;
-
-if(password === ADMIN_PASSWORD){
-
-document.getElementById("login").style.display="none";
-document.getElementById("panel").style.display="block";
-
-loadProducts();
-
-}else{
-
-document.getElementById("loginMsg").innerText =
-"Wrong password.";
-
-}
-
+ measurementId:
+ "G-LP21L8JN5P"
 };
 
 
-/* Compress image */
+const app=initializeApp(firebaseConfig);
+
+const auth=getAuth(app);
+
+const db=getFirestore(app);
+
+
+const loginBox=document.getElementById("loginBox");
+const adminPanel=document.getElementById("adminPanel");
+
+
+document.getElementById("loginBtn")
+.addEventListener("click",async()=>{
+
+ const email=document.getElementById("email").value.trim();
+ const password=document.getElementById("password").value;
+
+ try{
+
+  await signInWithEmailAndPassword(
+   auth,
+   email,
+   password
+  );
+
+ }catch(error){
+
+  document.getElementById("loginMessage")
+  .textContent="Login failed.";
+
+ }
+
+});
+
+
+onAuthStateChanged(auth,(user)=>{
+
+ if(user){
+
+  loginBox.style.display="none";
+  adminPanel.style.display="block";
+
+  loadProducts();
+
+ }else{
+
+  loginBox.style.display="block";
+  adminPanel.style.display="none";
+
+ }
+
+});
+
+
+document.getElementById("logoutBtn")
+.addEventListener("click",()=>signOut(auth));
+
 
 function compressImage(file){
 
-return new Promise((resolve,reject)=>{
+ return new Promise((resolve,reject)=>{
 
-const reader = new FileReader();
+  const reader=new FileReader();
 
-reader.onload = function(e){
+  reader.onload=e=>{
 
-const img = new Image();
+   const img=new Image();
 
-img.onload = function(){
+   img.onload=()=>{
 
-const max = 900;
+    const maxWidth=800;
 
-let width = img.width;
-let height = img.height;
+    let width=img.width;
+    let height=img.height;
 
-if(width > max){
+    if(width>maxWidth){
 
-height = height * max / width;
-width = max;
+     height=
+      height*(maxWidth/width);
+
+     width=maxWidth;
+
+    }
+
+    const canvas=document.createElement("canvas");
+
+    canvas.width=width;
+    canvas.height=height;
+
+    const ctx=canvas.getContext("2d");
+
+    ctx.drawImage(
+     img,
+     0,
+     0,
+     width,
+     height
+    );
+
+    resolve(
+     canvas.toDataURL(
+      "image/jpeg",
+      0.7
+     )
+    );
+
+   };
+
+   img.onerror=reject;
+
+   img.src=e.target.result;
+
+  };
+
+  reader.onerror=reject;
+
+  reader.readAsDataURL(file);
+
+ });
 
 }
 
-const canvas =
-document.createElement("canvas");
 
-canvas.width = width;
-canvas.height = height;
+document.getElementById("addBtn")
+.addEventListener("click",async()=>{
 
-const ctx =
-canvas.getContext("2d");
+ const name=
+ document.getElementById("productName")
+ .value.trim();
 
-ctx.drawImage(img,0,0,width,height);
+ const price=
+ document.getElementById("productPrice")
+ .value.trim();
 
-resolve(
-canvas.toDataURL("image/jpeg",0.65)
-);
+ const file=
+ document.getElementById("productImage")
+ .files[0];
 
-};
+ if(!name || !price || !file){
 
-img.src = e.target.result;
+  alert("Name, price and photo are required.");
 
-};
+  return;
 
-reader.onerror = reject;
+ }
 
-reader.readAsDataURL(file);
+ try{
+
+  const image=await compressImage(file);
+
+  await addDoc(
+   collection(db,"products"),
+   {
+    name:name,
+    price:price,
+    image:image,
+    createdAt:serverTimestamp()
+   }
+  );
+
+  document.getElementById("productName").value="";
+  document.getElementById("productPrice").value="";
+  document.getElementById("productImage").value="";
+
+  document.getElementById("message")
+  .textContent="Product added successfully.";
+
+  loadProducts();
+
+ }catch(error){
+
+  console.error(error);
+
+  alert("Could not add product.");
+
+ }
 
 });
 
-}
-
-
-/* Add product */
-
-window.addProduct = async function(){
-
-const name =
-document.getElementById("name").value.trim();
-
-const price =
-document.getElementById("price").value.trim();
-
-const file =
-document.getElementById("photo").files[0];
-
-const msg =
-document.getElementById("msg");
-
-if(!name || !price || !file){
-
-msg.innerText =
-"Name, price and photo are required.";
-
-return;
-
-}
-
-try{
-
-msg.innerText="Uploading...";
-
-const image =
-await compressImage(file);
-
-await addDoc(
-collection(db,"products"),
-{
-name:name,
-price:price,
-image:image,
-createdAt:Date.now()
-}
-);
-
-msg.innerText="Product added successfully!";
-
-document.getElementById("name").value="";
-document.getElementById("price").value="";
-document.getElementById("photo").value="";
-
-loadProducts();
-
-}catch(error){
-
-console.error(error);
-
-msg.innerText =
-"Error: "+error.message;
-
-}
-
-};
-
-
-/* Show products */
 
 async function loadProducts(){
 
-const list =
-document.getElementById("list");
+ const list=document.getElementById("productList");
 
-list.innerHTML="Loading...";
+ list.innerHTML="Loading...";
 
-const snapshot =
-await getDocs(collection(db,"products"));
+ try{
 
-list.innerHTML="";
+  const q=query(
+   collection(db,"products"),
+   orderBy("createdAt","desc")
+  );
 
-snapshot.forEach(item=>{
+  const snap=await getDocs(q);
 
-const p=item.data();
+  list.innerHTML="";
 
-const div =
-document.createElement("div");
+  if(snap.empty){
 
-div.className="product";
+   list.innerHTML="No products.";
 
-div.innerHTML=`
+   return;
 
-<img src="${p.image}">
+  }
 
-<div style="flex:1">
-<b>${p.name}</b><br>
-Rs. ${p.price}
-</div>
+  snap.forEach(item=>{
 
-<button
-class="delete"
-data-id="${item.id}">
-DELETE
-</button>
+   const p=item.data();
 
-`;
+   const div=document.createElement("div");
 
-div.querySelector(".delete")
-.addEventListener("click",()=>{
+   div.className="product";
 
-deleteProduct(item.id);
+   div.innerHTML=`
 
-});
+    <img src="${p.image || ''}">
 
-list.appendChild(div);
+    <h3>${p.name || ''}</h3>
 
-});
+    <p>Rs. ${p.price || ''}</p>
 
-}
+    <button class="edit">
+     Edit
+    </button>
+
+    <button class="delete">
+     Delete
+    </button>
+
+   `;
 
 
-/* Delete */
+   div.querySelector(".delete")
+   .addEventListener("click",async()=>{
 
-async function deleteProduct(id){
+    if(!confirm("Delete this product?"))
+     return;
 
-if(!confirm("Delete this product?"))
-return;
+    await deleteDoc(
+     doc(db,"products",item.id)
+    );
 
-await deleteDoc(
-doc(db,"products",id)
-);
+    loadProducts();
 
-loadProducts();
+   });
+
+
+   div.querySelector(".edit")
+   .addEventListener("click",async()=>{
+
+    const newName=
+    prompt(
+     "Product name:",
+     p.name || ""
+    );
+
+    if(newName===null)return;
+
+    const newPrice=
+    prompt(
+     "Price:",
+     p.price || ""
+    );
+
+    if(newPrice===null)return;
+
+    await updateDoc(
+     doc(db,"products",item.id),
+     {
+      name:newName,
+      price:newPrice
+     }
+    );
+
+    loadProducts();
+
+   });
+
+
+   list.appendChild(div);
+
+  });
+
+ }catch(error){
+
+  console.error(error);
+
+  list.innerHTML=
+   "Could not load products.";
+
+ }
 
 }
 
