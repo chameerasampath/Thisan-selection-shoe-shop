@@ -2,135 +2,62 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
 <title>Thisan Selection - Admin</title>
 
 <style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-console.log("ADMIN JS LOADED");
-
-loginBtn.addEventListener("click", () => {
-  alert("LOGIN BUTTON WORKS");
-});
+*{box-sizing:border-box}
 body{
-  font-family:Arial,sans-serif;
-  background:#f4f4f4;
-  color:#222;
+font-family:Arial;
+background:#f3f3f3;
+margin:0;
+padding:20px
 }
-
 .container{
-  max-width:1000px;
-  margin:auto;
-  padding:25px 15px;
+max-width:700px;
+margin:auto
 }
-
-h1{
-  text-align:center;
-  margin-bottom:25px;
+.box{
+background:white;
+padding:20px;
+border-radius:15px;
+margin-bottom:20px;
+box-shadow:0 3px 12px #0001
 }
-
-.card{
-  background:white;
-  padding:25px;
-  border-radius:15px;
-  margin-bottom:20px;
-  box-shadow:0 5px 20px rgba(0,0,0,.08);
+input,button{
+width:100%;
+padding:13px;
+margin-top:10px;
+border-radius:8px;
+border:1px solid #ccc;
+font-size:16px
 }
-
-input{
-  width:100%;
-  padding:13px;
-  margin:8px 0;
-  border:1px solid #ccc;
-  border-radius:8px;
-  font-size:16px;
-}
-
 button{
-  border:0;
-  padding:12px 18px;
-  border-radius:8px;
-  cursor:pointer;
-  font-size:15px;
-  margin-top:8px;
+background:#111;
+color:white;
+border:0;
+font-weight:bold
 }
-
-.login-btn,
-.add-btn{
-  background:#111;
-  color:white;
-  width:100%;
-}
-
-.logout-btn{
-  background:#b00020;
-  color:white;
-}
-
 .product{
-  display:flex;
-  align-items:center;
-  gap:15px;
-  border-bottom:1px solid #ddd;
-  padding:15px 0;
+display:flex;
+gap:15px;
+align-items:center;
+padding:12px;
+border-bottom:1px solid #ddd
 }
-
 .product img{
-  width:90px;
-  height:90px;
-  object-fit:cover;
-  border-radius:10px;
+width:80px;
+height:80px;
+object-fit:cover;
+border-radius:8px
 }
-
-.product-info{
-  flex:1;
+.delete{
+background:#e53935;
+width:auto;
+padding:9px 13px
 }
-
-.product-info h3{
-  margin-bottom:6px;
-}
-
-.edit-btn{
-  background:#222;
-  color:white;
-  margin-right:5px;
-}
-
-.delete-btn{
-  background:#d32f2f;
-  color:white;
-}
-
-#loginMessage,
-#message{
-  margin-top:12px;
-  text-align:center;
-}
-
-.hidden{
-  display:none;
-}
-
-@media(max-width:600px){
-  .product{
-    align-items:flex-start;
-  }
-
-  .product img{
-    width:75px;
-    height:75px;
-  }
-
-  .product button{
-    font-size:13px;
-    padding:8px 10px;
-  }
-}
+#panel{display:none}
 </style>
 </head>
 
@@ -138,92 +65,59 @@ button{
 
 <div class="container">
 
-  <!-- LOGIN -->
-  <div id="loginSection" class="card">
+<div id="login" class="box">
+<h2>Admin Login</h2>
 
-    <h1>Admin Login</h1>
+<input
+id="password"
+type="password"
+placeholder="Admin password">
 
-    <input
-      type="email"
-      id="email"
-      placeholder="Email"
-      autocomplete="email"
-    >
+<button onclick="login()">LOGIN</button>
 
-    <input
-      type="password"
-      id="password"
-      placeholder="Password"
-      autocomplete="current-password"
-    >
-
-    <button class="login-btn" id="loginBtn">
-      Login
-    </button>
-
-    <p id="loginMessage"></p>
-
-  </div>
+<p id="loginMsg"></p>
+</div>
 
 
-  <!-- ADMIN PANEL -->
-  <div id="adminSection" class="hidden">
+<div id="panel">
 
-    <div class="card">
+<div class="box">
 
-      <h1>Thisan Selection Admin</h1>
+<h2>Add Product</h2>
 
-      <button class="logout-btn" id="logoutBtn">
-        Logout
-      </button>
+<input
+id="name"
+placeholder="Product name">
 
-    </div>
+<input
+id="price"
+placeholder="Price">
 
+<input
+id="photo"
+type="file"
+accept="image/*">
 
-    <!-- ADD PRODUCT -->
-    <div class="card">
+<button onclick="addProduct()">
+ADD PRODUCT
+</button>
 
-      <h2>Add Product</h2>
+<p id="msg"></p>
 
-      <input
-        type="text"
-        id="productName"
-        placeholder="Product name"
-      >
-
-      <input
-        type="number"
-        id="productPrice"
-        placeholder="Price (optional)"
-      >
-
-      <input
-        type="file"
-        id="productImage"
-        accept="image/*"
-      >
-
-      <button class="add-btn" id="addBtn">
-        Add Product
-      </button>
-
-      <p id="message"></p>
-
-    </div>
+</div>
 
 
-    <!-- PRODUCTS -->
-    <div class="card">
+<div class="box">
 
-      <h2>Products</h2>
+<h2>Products</h2>
 
-      <div id="productsList">
-        Loading...
-      </div>
+<div id="list">
+Loading...
+</div>
 
-    </div>
+</div>
 
-  </div>
+</div>
 
 </div>
 
@@ -234,253 +128,258 @@ import { initializeApp }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
-  getAuth,
-  signInWithEmailAndPassword,
-  onAuthStateChanged,
-  signOut
-}
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  getDocs,
-  updateDoc,
-  deleteDoc,
-  doc,
-  query,
-  orderBy,
-  serverTimestamp
+getFirestore,
+collection,
+addDoc,
+getDocs,
+deleteDoc,
+doc
 }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
-/* =========================
-   FIREBASE CONFIG
-========================= */
-
 const firebaseConfig = {
 
-  apiKey:
-  "AIzaSyB8phN-4a8nDIhmpf5MlwsV5-_2yPwXEEk",
+apiKey: "AIzaSyB8phN-4a8nDIhmpf5MlwsV5-_2yPwXEEk",
 
-  authDomain:
-  "thisan-shoe-ahangama.firebaseapp.com",
+authDomain:
+"thisan-shoe-ahangama.firebaseapp.com",
 
-  projectId:
-  "thisan-shoe-ahangama",
+projectId:
+"thisan-shoe-ahangama",
 
-  storageBucket:
-  "thisan-shoe-ahangama.firebasestorage.app",
+storageBucket:
+"thisan-shoe-ahangama.firebasestorage.app",
 
-  messagingSenderId:
-  "552970131351",
+messagingSenderId:
+"552970131351",
 
-  appId:
-  "1:552970131351:web:9917c56ca7435ec62cd6d2",
+appId:
+"1:552970131351:web:9917c56ca7435ec62cd6d2",
 
-  measurementId:
-  "G-LP21L8JN5P"
+measurementId:
+"G-LP21L8JN5P"
+
 };
 
-
-/* =========================
-   FIREBASE START
-========================= */
-
 const app = initializeApp(firebaseConfig);
-
-const auth = getAuth(app);
-
 const db = getFirestore(app);
 
 
-/* =========================
-   ADMIN UID
-========================= */
-
-const ADMIN_UID =
-"s9cPLQO3vPTIVExTyBeHRyGdn0V2";
+/* CHANGE THIS PASSWORD */
+const ADMIN_PASSWORD = "Thisan1234";
 
 
-/* =========================
-   ELEMENTS
-========================= */
+window.login = function(){
 
-const loginSection =
-document.getElementById("loginSection");
+const password =
+document.getElementById("password").value;
 
-const adminSection =
-document.getElementById("adminSection");
+if(password === ADMIN_PASSWORD){
 
-const loginBtn =
-document.getElementById("loginBtn");
+document.getElementById("login").style.display="none";
+document.getElementById("panel").style.display="block";
 
-const logoutBtn =
-document.getElementById("logoutBtn");
+loadProducts();
 
-const loginMessage =
-document.getElementById("loginMessage");
+}else{
 
-const message =
-document.getElementById("message");
+document.getElementById("loginMsg").innerText =
+"Wrong password.";
 
-const productsList =
-document.getElementById("productsList");
+}
 
-const productName =
-document.getElementById("productName");
-
-const productPrice =
-document.getElementById("productPrice");
-
-const productImage =
-document.getElementById("productImage");
-
-const addBtn =
-document.getElementById("addBtn");
+};
 
 
-/* =========================
-   LOGIN
-========================= */
-
-loginBtn.addEventListener("click", async () => {
-
-  const email =
-  document.getElementById("email").value.trim();
-
-  const password =
-  document.getElementById("password").value;
-
-  if(!email || !password){
-
-    loginMessage.textContent =
-    "Please enter email and password.";
-
-    return;
-  }
-
-  loginMessage.textContent =
-  "Logging in...";
-
-  try{
-
-    const result =
-    await signInWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-
-    if(result.user.uid !== ADMIN_UID){
-
-      await signOut(auth);
-
-      loginMessage.textContent =
-      "You are not authorized as admin.";
-
-      return;
-    }
-
-    loginMessage.textContent =
-    "";
-
-  }catch(error){
-
-    console.error(error);
-
-    loginMessage.textContent =
-    error.code + " - " + error.message;
-  }
-
-});
-
-
-/* =========================
-   AUTH CHECK
-========================= */
-
-onAuthStateChanged(auth, async (user) => {
-
-  if(user && user.uid === ADMIN_UID){
-
-    loginSection.classList.add("hidden");
-
-    adminSection.classList.remove("hidden");
-
-    loadProducts();
-
-  }else{
-
-    loginSection.classList.remove("hidden");
-
-    adminSection.classList.add("hidden");
-
-  }
-
-});
-
-
-/* =========================
-   LOGOUT
-========================= */
-
-logoutBtn.addEventListener("click", async () => {
-
-  await signOut(auth);
-
-});
-
-
-/* =========================
-   IMAGE COMPRESS
-========================= */
+/* Compress image */
 
 function compressImage(file){
 
-  return new Promise((resolve,reject)=>{
+return new Promise((resolve,reject)=>{
 
-    const reader =
-    new FileReader();
+const reader = new FileReader();
 
-    reader.onload = (event) => {
+reader.onload = function(e){
 
-      const img =
-      new Image();
+const img = new Image();
 
-      img.onload = () => {
+img.onload = function(){
 
-        const canvas =
-        document.createElement("canvas");
+const max = 900;
 
-        const maxWidth = 900;
+let width = img.width;
+let height = img.height;
 
-        const scale =
-        Math.min(
-          1,
-          maxWidth / img.width
-        );
+if(width > max){
 
-        canvas.width =
-        img.width * scale;
+height = height * max / width;
+width = max;
 
-        canvas.height =
-        img.height * scale;
+}
 
-        const ctx =
-        canvas.getContext("2d");
+const canvas =
+document.createElement("canvas");
 
-        ctx.drawImage(
-          img,
-          0,
-          0,
-          canvas.width,
-          canvas.height
-        );
+canvas.width = width;
+canvas.height = height;
 
-        const data =
-        canvas.toDataURL(
-          "image/jpeg",
-          0.75
+const ctx =
+canvas.getContext("2d");
+
+ctx.drawImage(img,0,0,width,height);
+
+resolve(
+canvas.toDataURL("image/jpeg",0.65)
+);
+
+};
+
+img.src = e.target.result;
+
+};
+
+reader.onerror = reject;
+
+reader.readAsDataURL(file);
+
+});
+
+}
+
+
+/* Add product */
+
+window.addProduct = async function(){
+
+const name =
+document.getElementById("name").value.trim();
+
+const price =
+document.getElementById("price").value.trim();
+
+const file =
+document.getElementById("photo").files[0];
+
+const msg =
+document.getElementById("msg");
+
+if(!name || !price || !file){
+
+msg.innerText =
+"Name, price and photo are required.";
+
+return;
+
+}
+
+try{
+
+msg.innerText="Uploading...";
+
+const image =
+await compressImage(file);
+
+await addDoc(
+collection(db,"products"),
+{
+name:name,
+price:price,
+image:image,
+createdAt:Date.now()
+}
+);
+
+msg.innerText="Product added successfully!";
+
+document.getElementById("name").value="";
+document.getElementById("price").value="";
+document.getElementById("photo").value="";
+
+loadProducts();
+
+}catch(error){
+
+console.error(error);
+
+msg.innerText =
+"Error: "+error.message;
+
+}
+
+};
+
+
+/* Show products */
+
+async function loadProducts(){
+
+const list =
+document.getElementById("list");
+
+list.innerHTML="Loading...";
+
+const snapshot =
+await getDocs(collection(db,"products"));
+
+list.innerHTML="";
+
+snapshot.forEach(item=>{
+
+const p=item.data();
+
+const div =
+document.createElement("div");
+
+div.className="product";
+
+div.innerHTML=`
+
+<img src="${p.image}">
+
+<div style="flex:1">
+<b>${p.name}</b><br>
+Rs. ${p.price}
+</div>
+
+<button
+class="delete"
+data-id="${item.id}">
+DELETE
+</button>
+
+`;
+
+div.querySelector(".delete")
+.addEventListener("click",()=>{
+
+deleteProduct(item.id);
+
+});
+
+list.appendChild(div);
+
+});
+
+}
+
+
+/* Delete */
+
+async function deleteProduct(id){
+
+if(!confirm("Delete this product?"))
+return;
+
+await deleteDoc(
+doc(db,"products",id)
+);
+
+loadProducts();
+
+}
+
+</script>
+
+</body>
+</html>
